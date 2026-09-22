@@ -1,0 +1,9 @@
+docker build --platform linux/amd64 -f deploy/Dockerfile -t doodler_docker_image .
+
+docker run --platform linux/amd64 -p 8050:8050 \
+  -v "$(pwd)/app.py:/app.py" \
+  -v "$(pwd)/classes.txt:/classes.txt" \
+  -v "$(pwd)/assets:/assets" \
+  -v "$(pwd)/results:/results" \
+  -v "$(pwd)/labeled:/labeled" \
+  --rm -it doodler_docker_image

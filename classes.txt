@@ -1,2 +1,4 @@
 water
-land
+whitewater
+sediment
+other
