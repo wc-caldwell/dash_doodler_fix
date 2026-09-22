@@ -8,7 +8,9 @@ app_files/src/__pycache__/*
 
 app_files/logs/*.log
 
-labeled/*.zip
-assets/*.jpg
-assets/*.jpeg
-assets/*.JPG
+*labeled/*.zip
+*assets/*.jpg
+*assets/*.jpeg
+*assets/*.JPG
+
+*.DS_Store
