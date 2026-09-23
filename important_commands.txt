@@ -5,10 +5,14 @@ You should be able to just install python dependencies and run ```python doodler
 
 docker build --platform linux/amd64 -f deploy/Dockerfile -t doodler_docker_image .
 
+mkdir -p app_files/logs
+
 docker run --platform linux/amd64 -p 8050:8050 \
   -v "$(pwd)/app.py:/app.py" \
   -v "$(pwd)/classes.txt:/classes.txt" \
+  -v "$(pwd)/files_done.txt:/files_done.txt" \
   -v "$(pwd)/assets:/assets" \
   -v "$(pwd)/results:/results" \
   -v "$(pwd)/labeled:/labeled" \
-  --rm -it doodler_docker_image
+  -v "$(pwd)/app_files/logs:/app_files/logs" \
+  --rm -it doodler_docker_image 2>&1 | tee run.log

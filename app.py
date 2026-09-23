@@ -118,11 +118,13 @@ def get_unlabeled_files() -> list:
 
 
 ##========================================================
+# this should persist the zoom when drawing labels
 def make_and_return_default_figure(
     images,
     stroke_color,
     pen_width,
     shapes,
+    uirevision=None,
 ):
     """
     create and return the default Dash/plotly figure object
@@ -138,12 +140,15 @@ def make_and_return_default_figure(
             "newshape.line.color": stroke_color,
             "newshape.line.width": pen_width,
             "margin": dict(l=0, r=0, b=0, t=0, pad=4),
-            "height": 650
+            "height": 650,
+            # preserve zoom/pan across figure rebuilds. the value must change
+            # whenever the layout images legitimately change, or plotly will
+            # keep showing the old ones
+            "uirevision": uirevision,
         }
     )
 
     return fig
-
 
 ##========================================================
 def dummy_fig():
@@ -725,6 +730,9 @@ def update_output(
         stroke_color=convert_integer_class_to_color(class_label_colormap, label_class_value),
         pen_width=pen_width,
         shapes=masks_data["shapes"],
+        uirevision="{}|{}".format(
+            select_image_value, "Show segmentation" in show_segmentation_value
+        ),
     )
 
     logging.info('Main figure window updated with new image')
