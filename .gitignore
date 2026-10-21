@@ -14,3 +14,7 @@ app_files/logs/*.log
 *assets/*.JPG
 
 *.DS_Store
+
+run.log
+labeled
+results
